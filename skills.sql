@@ -33,16 +33,19 @@ SELECT name FROM Brands WHERE discontinued IS NULL;
 
 
 -- 8. Select rows 15-25 of the DB in alphabetical order by model name.
-SELECT * FROM Models WHERE 
+SELECT * FROM Models ORDER BY brand_name ASC LIMIT 10 OFFSET 14;
+
 
 -- 9. Select the **brand, name, and year the model's brand was 
 --    founded** for all of the models from 1960. Include row(s)
 --    for model(s) even if its brand is not in the Brands table.
 --    (The year the brand was founded should be ``null`` if 
 --    the brand is not in the Brands table.)
-SELECT Models.brand_name, Brands.name, Brands.founded FROM 
-Brands.name == Ford
-Models.brand_name == Ford
+SELECT Models.brand_name, Brands.name, Brands.founded 
+FROM Models JOIN Brands
+ON Models.brand_name=Brands.founded
+WHERE Brands.founded=1960;
+
 
 -- Part 2: Change the following queries according to the specifications. 
 -- Include the answers to the follow up questions in a comment below your
