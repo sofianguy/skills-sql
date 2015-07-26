@@ -62,6 +62,11 @@ WHERE Brands.founded=1960;
     --     ON b.name = m.brand_name
     -- WHERE b.discontinued IS NULL;
 
+    SELECT Brands.name, Models.brand_name, Brands.discontinued
+    FROM Brands JOIN Models 
+    ON Brands.name = Models.brand_name
+    WHERE Brands.discontinued IS NULL;
+
 -- 2. Modify this left join so it only selects models that have brands in the Brands table.
 -- before: 
     -- SELECT m.name,
@@ -70,9 +75,17 @@ WHERE Brands.founded=1960;
     -- FROM Models AS m
     --   LEFT JOIN Brands AS b
     --     ON b.name = m.brand_name;
+    SELECT Models.brand_name, Brands.name
+    FROM Brands LEFT JOIN Models 
+    ON Models.brand_name=Brands.name;
+
 
 -- followup question: In your own words, describe the difference between 
 -- left joins and inner joins.
+    -- LEFT JOIN joins table #1 to table #2
+    -- INNER JOIN joins common fields between two table rows
+
+
 
 -- 3. Modify the query so that it only selects brands that don't have any car models in the cars table. 
 -- (Hint: it should only show Tesla's row.)
@@ -83,9 +96,17 @@ WHERE Brands.founded=1960;
     --   LEFT JOIN Models
     --     ON brands.name = Models.brand_name
     -- WHERE Models.year > 1940;
+    SELECT Brands.name, Models.brand_name
+    FROM Brands LEFT JOIN Models
+    ON Brands.name=Models.brand_name
+    WHERE Models.brand_name IS NULL;
+
+
+
 
 -- 4. Modify the query to add another column to the results to show 
--- the number of years from the year of the model *until* the brand becomes discontinued
+-- the number of years from the year of the model *until* the brand 
+-- becomes discontinued
 -- Display this column with the name years_until_brand_discontinued.
 -- before: 
     -- SELECT b.name,
@@ -96,7 +117,10 @@ WHERE Brands.founded=1960;
     --   LEFT JOIN brands AS b
     --     ON m.brand_name = b.name
     -- WHERE b.discontinued NOT NULL;
-
+    SELECT Models.brand_name, Brands.name, Brands.founded, Brands.discontinued 
+    FROM Models LEFT JOIN Brands
+    ON Models.brand_name=Brands.name
+    WHERE 
 
 
 
